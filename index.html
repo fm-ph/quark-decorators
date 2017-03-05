@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#bind">bind</a></li><li><a href="global.html#mixin">mixin</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>quark-decorators</h1><p><a href="http://travis-ci.org/fm-ph/quark-decorators"><img src="https://img.shields.io/travis/fm-ph/quark-decorators/master.svg?style=flat-square" alt="build status"></a>
+<a href="https://nodejs.org/api/documentation.html#documentation_stability_index"><img src="https://img.shields.io/badge/stability-stable-brightgreen.svg?style=flat-square" alt="stability"></a>
+<a href="https://npmjs.org/package/quark-decorators"><img src="https://img.shields.io/npm/v/quark-decorators.svg?style=flat-square" alt="npm version"></a>
+<a href="https://github.com/feross/standard"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square" alt="js-standard-style"></a>
+<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square" alt="semantic-release"></a></p>
+<p>Simple <a href="https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841">decorators</a> (ES2016) based on <a href="https://en.wikipedia.org/wiki/Decorator_pattern"><strong>Decorator</strong></a> design pattern.</p>
+<p><strong><em>This package is part of <code>quark</code> framework but it can be used independently.</em></strong></p>
+<h2>Installation</h2><p><a href="https://www.npmjs.com/package/quark-decorators"><img src="https://nodei.co/npm/quark-decorators.png" alt="NPM"></a></p>
+<pre class="prettyprint source lang-sh"><code>npm install quark-decorators --save</code></pre><p><strong><em>Note</em></strong> : In order to use <strong>decorators</strong> properly, you need a compiler like <a href="https://babeljs.io/"><strong>Babel 6</strong></a>.</p>
+<p>Also, you need to install <a href="https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy">Babel legacy decorator plugin</a> :</p>
+<pre class="prettyprint source lang-sh"><code>npm install babel-plugin-transform-decorators-legacy --save-dev</code></pre><p>And add the following line to your <strong>Babel</strong> configuration :</p>
+<pre class="prettyprint source lang-json"><code>{
+  &quot;plugins&quot;: [&quot;transform-decorators-legacy&quot;]
+}</code></pre><h2>Usage</h2><h3>Bind</h3><p><strong><em>Method only</em></strong></p>
+<p>Binds a class method to the current context.</p>
+<pre class="prettyprint source lang-js"><code>import { bind } from 'quark-decorators'
+
+class Test {
+  @bind
+  test () {
+    return this
+  }
+}
+
+const testInstance = new Test()
+const { test } = testInstance
+
+console.log(test() === testInstance) // = true</code></pre><h3>Mixin</h3><p><strong><em>Class only</em></strong></p>
+<p>Mixes object(s) with a class prototype.</p>
+<h4>Single mixin</h4><pre class="prettyprint source lang-js"><code>import { mixin } from 'quark-decorators'
+
+const TestMixin = {
+  test() {
+    return true
+  }
+}
+
+@mixin(TestMixin)
+class Test { }
+
+const testInstance = new Test()
+console.log(testInstance.test()) // = true</code></pre><h4>Multiple mixins</h4><pre class="prettyprint source lang-js"><code>import { mixin } from 'quark-decorators'
+
+const Test1Mixin = {
+  test() {
+    return true
+  }
+}
+
+const Test2Mixin = {
+  test() {
+    return false
+  }
+}
+
+@mixin(Test1Mixin, Test2Mixin)
+class Test { }
+
+const testInstance = new Test()
+console.log(testInstance.test()) // = false (last mixin method value)</code></pre><h4>Mixin with multiple types property</h4><pre class="prettyprint source lang-js"><code>import { mixin } from 'quark-decorators'
+
+const TestMixin = {
+  foo: 'bar',
+  foo() {
+    return 'bar'
+  }
+}
+
+@mixin(TestMixin)
+class Test { }
+
+const testInstance = new Test()
+console.log(testInstance.foo) // = 'bar'
+console.log(testInstance.foo()) // = 'bar'</code></pre><h2>API</h2><p>See <a href="https://fm-ph.github.io/quark-decorators/">https://fm-ph.github.io/quark-decorators/</a></p>
+<h2>Build</h2><p>To build the sources with <code>babel</code> in <code>./lib</code> directory :</p>
+<pre class="prettyprint source lang-sh"><code>npm run build</code></pre><h2>Documentation</h2><p>To generate the <code>JSDoc</code> :</p>
+<pre class="prettyprint source lang-sh"><code>npm run docs</code></pre><p>To generate the documentation and deploy on <code>gh-pages</code> branch :</p>
+<pre class="prettyprint source lang-sh"><code>npm run docs:deploy</code></pre><h2>Testing</h2><p>To run the tests, first clone the repository and install its dependencies :</p>
+<pre class="prettyprint source lang-sh"><code>git clone https://github.com/fm_ph/quark-decorators.git
+cd quark-decorators
+npm install</code></pre><p>Then, run the tests :</p>
+<pre class="prettyprint source lang-sh"><code>npm test</code></pre><p>To watch (test-driven development) :</p>
+<pre class="prettyprint source lang-sh"><code>npm run test:watch</code></pre><p>For coverage :</p>
+<pre class="prettyprint source lang-sh"><code>npm run test:coverage</code></pre><h2>License</h2><p>MIT <a href="LICENSE.md">License</a> © <a href="http://hengpatrick.fr/">Patrick Heng</a> <a href="http://fabienmotte.com/">Fabien Motte</a> </p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Mar 05 2017 03:49:32 GMT+0100 (CET) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
