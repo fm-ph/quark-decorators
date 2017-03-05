@@ -1,7 +1,7 @@
 import bind from './bind'
 import mixin from './mixin'
 
-export {
+export default {
   bind,
   mixin
 }
