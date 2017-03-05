@@ -1,0 +1,18 @@
+{
+  "presets": [
+    "es2015"
+  ],
+  "plugins": [
+    "add-module-exports"
+  ],
+  "ignore": "test.js",
+  "env": {
+    "development": {
+      "sourceMaps": "inline",
+      "plugins": [
+        "transform-runtime",
+        "transform-decorators-legacy"
+      ]
+    }
+  }
+}
