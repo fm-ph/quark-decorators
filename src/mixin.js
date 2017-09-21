@@ -23,7 +23,9 @@ export default function mixin (...mixins) {
     const mergedFunctions = {}
 
     // Parse mixins
-    for (const mixin of mixins) {
+
+    for (let i = 0, l = mixins.length; i < l; i++) {
+      const mixin = mixins[i]
       for (const key in mixin) {
         const prop = mixin[key]
 
@@ -44,7 +46,8 @@ export default function mixin (...mixins) {
       prototype[key] = function (...args) {
         let result
 
-        for (const fn of functions) {
+        for (let i = 0, l = functions.length; i < l; i++) {
+          const fn = functions[i]
           result = fn.apply(this, args)
         }
 
