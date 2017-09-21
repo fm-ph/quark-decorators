@@ -1,4 +1,4 @@
-# quark-decorators
+# [<img src="logo.png" alt="quark-decorators" width="200">](https://github.com/fm-ph/quark-decorators)
 
 [![build status][travis-image]][travis-url]
 [![stability][stability-image]][stability-url]
